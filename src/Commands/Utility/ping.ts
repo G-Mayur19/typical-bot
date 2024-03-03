@@ -25,7 +25,7 @@ const command: Command = {
         })
         .setTimestamp()
         .setTitle("My stats:")
-        .setDescription(`**Ping: ** \`${client.ws.ping}ms\`\n**Uptime: ** \`${str}\`\n**Commands: ** \`${client.commands.size}\``)
+        .setDescription(`**Ping: ** \`${client.ws.ping}ms\`\n**Uptime: ** \`${str}\`\n**Commands: ** \`${client.commands.size}\`\n**Slash Commands: ** \`${client.slash.size}\``)
         .setThumbnail(client.user?.displayAvatarURL() || null)
         msg.channel.send({
             embeds: [replyEmbed]

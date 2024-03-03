@@ -14,7 +14,7 @@ import mongoose from "mongoose";
             Routes.applicationCommands(client.config.ClientID),
             { body: cmds }
         );
-        console.log(`Registered ${cmds.length} as slash commands.`)
+        console.log(`Registered ${cmds.length} slash commands.`)
     }
 })();
 

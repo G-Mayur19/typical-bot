@@ -9,7 +9,7 @@ const slash: Slash = {
     },
     usage: "ping",
     run: async(client, interaction) => {
-        interaction.deferReply();
+        await interaction.deferReply();
         let str = ``;
         const uptime = client.uptime;
         if(!uptime) return;
@@ -28,9 +28,9 @@ const slash: Slash = {
         })
         .setTimestamp()
         .setTitle("My stats:")
-        .setDescription(`**Ping: ** \`${client.ws.ping}ms\`\n**Uptime: ** \`${str}\`\n**Commands: ** \`${client.commands.size}\``)
+        .setDescription(`**Ping: ** \`${client.ws.ping}ms\`\n**Uptime: ** \`${str}\`\n**Commands: ** \`${client.commands.size}\`\n**Slash Commands: ** \`${client.slash.size}\``)
         .setThumbnail(client.user?.displayAvatarURL() || null)
-        interaction.editReply({ embeds: [replyEmbed]})
+        await interaction.editReply({ embeds: [replyEmbed]})
     }
 }
 

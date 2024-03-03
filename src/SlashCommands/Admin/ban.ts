@@ -34,7 +34,6 @@ const slash: Slash = {
     async run(client, interaction) {
         const { user, guild, options } = interaction;
         const choice = options.get("config", true);
-        console.log(choice)
         if(!interaction.channel) return interaction.reply({ 
             content: `This command can only be ran in a channel`,
             ephemeral: true

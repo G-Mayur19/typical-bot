@@ -4,6 +4,8 @@ import collector from "../../Functions/collector";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { OwnerDB } from "../../Models/owner"
+import { getCmd } from "../../Functions/getCmd";
+import { isCommand } from "../../Functions/isCommand";
 
 const emojis = [
     {
@@ -74,14 +76,9 @@ const command: Command = {
             });
             await collector(client, msg, row, message.author.id);
         } else {
-            let cmd;
-            cmd = client.commands.get(CMD.toLowerCase());
-            if(!cmd) {
-                const name = client.aliases.get(CMD.toLowerCase());
-                if(!name) return message.reply(`Command not found!`);
-                cmd = client.commands.get(name);
-                if(!cmd) return message.reply("Command not found!");
-            }
+            const cmd = getCmd(client, CMD.toLowerCase(), false);
+            if(!cmd) return message.reply("Command not found lmao!");
+            if(!isCommand(cmd)) return message.reply("Only message commands can be used in this command!");
             const embed = new EmbedBuilder()
             .setColor("Random")
             .setFooter({
