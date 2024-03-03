@@ -11,4 +11,10 @@ npm i @types/node tsx
 
 **Don't forget to config you package.json to your requirements!**
 
+## Create a file named "dist" (case sensitive)
+
+**This will contain the javascript code of your bot!**
+
+**Run `npm run build` to convert you typescript code to javascript**
+
 ### This will be getting updates every now and then!
