@@ -1,10 +1,10 @@
 import { Bot } from "../Client";
 
-async function getCmd(client: Bot, string: String, slash: boolean) {
+function getCmd(client: Bot, string: String, slash: boolean) {
     const cmd = string.toLowerCase();
     let result;
     if(slash) {
-        result = await client.slash.get(cmd);
+        result = client.slash.get(cmd);
         return result
     } else {
         result = client.commands.get(cmd);
