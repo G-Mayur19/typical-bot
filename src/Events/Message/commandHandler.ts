@@ -15,12 +15,13 @@ const event: Event = {
         const args = message.content.slice(client.prefix.length).trim().split(/ +/g);
         if(!args[0]) return message.reply(`Use \`${client.prefix + "help"}\` to see the available commands!`)
         const cmd = await getCmd(client, args[0].toLowerCase(), false)
-        const data = await OwnerDB.findOne({ userId: client.config.Owner });
+        let data = await OwnerDB.findOne({ userId: client.config.Owner });
         if(!data) {
-            await OwnerDB.create({ userId: client.config.Owner })
+            data = await OwnerDB.create({ userId: client.config.Owner })
         }
         if(!cmd) return message.reply("Command not found lmao!");
         if(isCommand(cmd)) {
+            if(data.Cmds.includes(cmd.name)) return message.reply("Command is currently disabled!");
             await runCmd(cmd, message, client, args)
         } else {
             return;
