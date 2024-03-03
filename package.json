@@ -2,7 +2,7 @@
   "name": "syphrus",
   "version": "1.0.0",
   "description": "My Bot",
-  "main": "./dist/index.js",
+  "main": "./dist/src/index.js",
   "scripts": {
     "start": "node .",
     "dev": "tsx watch ./src/index.ts",
