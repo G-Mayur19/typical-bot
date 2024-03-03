@@ -1,0 +1,8 @@
+{
+    "Token": "Your client token",
+    "Owner": "your id",
+    "Devs": ["your 1st dev/tester", "...add more"],
+    "Mongo": "your mongoURI",
+    "ClientID": "your clientId",
+    "GuildID": "your private/test server id"
+}
