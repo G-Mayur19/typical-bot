@@ -1,7 +1,7 @@
-import { ApplicationCommandData, CommandInteraction } from "discord.js";
+import { ApplicationCommandData, ChatInputCommandInteraction } from "discord.js";
 import { Bot } from "../Client";
 
-function Run(client: Bot, interaction: CommandInteraction) {};
+function Run(client: Bot, interaction: ChatInputCommandInteraction) {};
 
 interface Slash {
     data: ApplicationCommandData,
