@@ -26,7 +26,12 @@ const command: Command = {
         embed.setDescription(desc);
         await message.channel.send({
             embeds: [embed]
-        })
+        });
+        for (const data of datas) {
+            data.votes = 0;
+            data.voted = false;
+            await data.save()
+        }
 
     },
 }

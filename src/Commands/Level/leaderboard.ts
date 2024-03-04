@@ -1,6 +1,7 @@
 import { Command } from "../../Interfaces/Command";
 import { EmbedBuilder } from "discord.js";
 import { LevelDB } from "../../Models/level";
+import { CalcRequiredXP } from "../../Functions/requiredXp";
 
 const command: Command = {
     name: "leaderboard",
@@ -21,9 +22,9 @@ const command: Command = {
         let lbString = ``;
         for (let i = 0; i < LBData.length; i++) {
             if(i === 10) return;
-            const member = client.users.cache.get(LBData[i].userId);
-            const data = LBData[i]
-            lbString += `**${i + 1}.** ${member?.username} \`Level: ${data.Level}\`\n`
+            const data = LBData[i];
+            let math = ((data.XP/CalcRequiredXP(data.Level))*100).toString();
+            lbString += `**${i + 1}.** <@!${data.userId}> \`Level: ${data.Level}(${math}%)\`\n`
         }
         let footerText = ``;
         userRank ? footerText += `You are currently ranked #${userRank} in the server` : "Not yet ranked!"
