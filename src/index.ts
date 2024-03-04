@@ -15,6 +15,7 @@ import mongoose from "mongoose";
             Routes.applicationCommands(client.config.ClientID),
             { body: cmds }
         );
+        console.log(`Registered ${cmds.length} slash commands.`)
         // For private commands: 
         // const guild = await client.guilds.fetch(client.config.GuildID) // Make sure you have this
         // await guild.commands.set(cmds)

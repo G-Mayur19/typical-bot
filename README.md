@@ -4,7 +4,7 @@ A typical bot for administration, fun, levelling and other minecraft commands.
 ## Instructions
 Download @types/node & tsx
 ```cli
-npm i @types/node tsx
+$ npm i @types/node tsx
 ```
 
 **Create a folder named `Data` and create a `config.json` file!**

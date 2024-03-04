@@ -5,15 +5,16 @@ import mongoose from "mongoose";
 const event: Event = {
     event: 'ready',
     async run(client) {
-        client.user?.setPresence({
+        if(!client.user) return;
+        client.user.setPresence({
             activities: [
                 {
                     name: "you",
                     type: ActivityType.Watching
                 }
             ],
+            status: "dnd"
         });
-        client.user?.setStatus("dnd");
         await console.log(`${client.user?.tag} is ready!`)
     },
 }
