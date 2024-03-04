@@ -3,6 +3,8 @@ import { EmbedBuilder } from "discord.js";
 import { OwnerDB } from "../../Models/owner";
 import {  readdirSync } from "fs";
 import { join } from "path";
+import { getCmd } from "../../Functions/getCmd";
+import { isCommand } from "../../Functions/isCommand";
 
 const command: Command = {
     name: "enable",
@@ -23,11 +25,11 @@ const command: Command = {
             const subCmd = args[0].toLowerCase();
             if(subCmd === "cmd") {
                 const choice = args[1].toLowerCase();
-                const res = client.commands.get(choice);
-                if(!res) return message.reply("No aliases, only command names!");
+                const res = getCmd(client, choice, false);
+                if(!res) return message.reply("No command found!");
+                if(!isCommand(res)) return message.reply("Command does not belong to message category")
                 if(!data.Cmds.includes(res.name)) return message.reply("Command is not disabled!");
                 const i = data.Cmds.findIndex((v) => v.toLowerCase() === choice);
-                console.log(i)
                 data.Cmds.splice(i, 1);
                 await data.save();
                 message.channel.send(`Command \`${res.name}\` has been enabled!`);
