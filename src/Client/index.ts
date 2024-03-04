@@ -39,11 +39,15 @@ export class Bot extends Client {
             if(data.Category.includes(dir)) return;
             readdirSync(join(__dirname, ".." ,"Commands", dir)).forEach((file) => {
                 const pull: Command = require(`../Commands/${dir}/${file}`).default;
-                cmd.set(pull.name, pull);
-                if(pull.aliases) {
-                    pull.aliases.forEach(alias => this.aliases.set(alias, pull.name))
+                if(!pull) {
+                    return console.warn(`${file} is missing command data!`)
+                } else {
+                    cmd.set(pull.name, pull);
+                    if(pull.aliases) {
+                        pull.aliases.forEach(alias => this.aliases.set(alias, pull.name))
+                    }
+                    console.log(`Command: ${pull.name} loaded.`)
                 }
-                console.log(`Command: ${pull.name} loaded.`)
             });
         });
     }
@@ -52,12 +56,16 @@ export class Bot extends Client {
         readdirSync(path).forEach((dir) => {
             readdirSync(join(__dirname, "..", "Events", dir)).forEach((file) => {
                 const pull: Event = require(`../Events/${dir}/${file}`).default;
-                if(pull.once) {
-                    this.once(pull.event, (...args: any) => { pull.run(this, ...args)})
+                if(!pull) {
+                    return console.warn(`${file} is missing event`)
                 } else {
-                    this.on(pull.event, (...args: any) => pull.run(this, ...args));
+                    if(pull.once) {
+                        this.once(pull.event, (...args: any) => { pull.run(this, ...args)})
+                    } else {
+                        this.on(pull.event, (...args: any) => pull.run(this, ...args));
+                    }
+                        console.log(`Event set: ${file.split(".")[0]}`)
                 }
-                    console.log(`Event set: ${file.split(".")[0]}`)
              });
         });
         
@@ -68,8 +76,12 @@ export class Bot extends Client {
         readdirSync(join(__dirname, "..", "SlashCommands")).forEach((d) => {
             readdirSync(join(__dirname, "..", "SlashCommands", d)).forEach((f) => {
                 const pull: Slash = require(`../SlashCommands/${d}/${f}`).default;
-                cmds.push(pull.data);
-                this.slash.set(pull.data.name, pull);
+                if(!pull) {
+                    return console.warn(`${f} is missing slash command data!`)
+                } else {
+                    cmds.push(pull.data);
+                    this.slash.set(pull.data.name, pull);
+                }
             });
         });
         return cmds;

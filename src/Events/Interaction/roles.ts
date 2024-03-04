@@ -22,7 +22,8 @@ const colorRoles = [
         name: "White",
         ID: "1214130875571372072"
     }
-]
+];
+const roleCustomIDs = ["polls", "announcements"]
 
 const event: Event = {
     event: "interactionCreate",
@@ -32,6 +33,7 @@ const event: Event = {
         if(!member) return;
         if(interaction.isButton()) {
             const { customId, guild, user } = interaction;
+            if(!roleCustomIDs.includes(customId)) return;
             const res = await Role(member, customId, guild);
             if(!res) return interaction.reply({
                 content: `There has been an error,\nPlease inform <@!${client.config.Owner}>`,
