@@ -1,5 +1,5 @@
 import { Command } from "../../Interfaces/Command";
-import { EmbedBuilder } from "discord.js";
+import { AttachmentBuilder, EmbedBuilder } from "discord.js";
 import { statusJava } from "node-mcstatus";
 
 const command: Command = {
@@ -31,6 +31,12 @@ const command: Command = {
         } else {
             resEmbed.setDescription(`Server is currently offline!`)
         }
+        let atch;
+        if(res.icon) {
+            const buffer = Buffer.from(res.icon, "base64");
+            atch = new AttachmentBuilder(buffer, { name: "icon.png" });
+        }
+        resEmbed.setThumbnail(`attachment://${atch?.name}`);
 
         msg.channel.send({
             embeds: [resEmbed]
@@ -38,4 +44,4 @@ const command: Command = {
     }
 }
 
-export default command
+export default command;
