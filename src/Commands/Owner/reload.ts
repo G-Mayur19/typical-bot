@@ -17,15 +17,18 @@ const command: Command = {
         if(!data) return message.reply("Couldn't find data!")
         client.commands.sweep((v, k, c) => true);
         readdirSync(join(__dirname, "..", "..", "Commands")).forEach((dir) => {
-            if(data.Category.includes(dir)) return;
-            readdirSync(join(__dirname, "..", "..", "Commands", dir)).forEach((file) => {
-                delete require.cache[require.resolve(join(__dirname, "..", "..", "Commands", dir, file))];
-                const pull: Command = require(`../../Commands/${dir}/${file}`);
-                client.commands.set(pull.name, pull);
-                if(pull.aliases) {
-                    pull.aliases.forEach((a) => client.aliases.set(a, pull.name))
-                }
-            });
+            if(data.Category.includes(dir)) {
+                return
+            } else {
+                readdirSync(join(__dirname, "..", "..", "Commands", dir)).forEach((file) => {
+                    delete require.cache[require.resolve(join(__dirname, "..", "..", "Commands", dir, file))];
+                    const pull: Command = require(`../../Commands/${dir}/${file}`);
+                    client.commands.set(pull.name, pull);
+                    if(pull.aliases) {
+                        pull.aliases.forEach((a) => client.aliases.set(a, pull.name))
+                    }
+                });
+            }
 
         });
         msg.edit({

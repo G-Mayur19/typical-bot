@@ -41,6 +41,7 @@ async function collector(client: Bot, message: Message, row: ActionRowBuilder<St
 
     collector.on('end', () => {
         row.components.forEach((d) => d.setDisabled(true));
+        if(!message) return;
         message.edit({ 
             components: [row],
             content: `Time's up`,

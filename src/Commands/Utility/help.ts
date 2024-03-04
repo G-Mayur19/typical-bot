@@ -58,15 +58,18 @@ const command: Command = {
             if(data === null) return;
             readdirSync(path).forEach(dir => {
                 if(dir == "Owner") return;
-                if(data.Category.includes(dir)) return;
-                const emoji = emojis.find((v) => v.name === dir);
-                const placeholder: SelectMenuComponentOptionData = {
-                    label: dir,
-                    value: dir,
-                    description: `${dir} commands`,
-                    emoji: emoji?.emoji
+                if(data.Category.includes(dir)) {
+                    return;
+                } else {
+                    const emoji = emojis.find((v) => v.name === dir);
+                    const placeholder: SelectMenuComponentOptionData = {
+                        label: dir,
+                        value: dir,
+                        description: `${dir} commands`,
+                        emoji: emoji?.emoji
+                    }
+                    options.push(placeholder)
                 }
-                options.push(placeholder)
             });  
             menu.setOptions(options);
             row.addComponents(menu);
