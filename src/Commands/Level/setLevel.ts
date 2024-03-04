@@ -6,7 +6,7 @@ import { LevelDB } from "../../Models/level";
 const command: Command = {
     name: "set-level",
     description: "Set XP to the user!",
-    usage: "setXp (user) (XP)",
+    usage: "set-lvl (user) (level)",
     run: async(client, message, args) => {
         if(!message.mentions.users) return message.reply("Mention a user to set Level.");
         if(!args[1]) return message.reply("Level must be a number!");
