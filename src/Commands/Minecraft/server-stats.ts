@@ -31,15 +31,16 @@ const command: Command = {
         } else {
             resEmbed.setDescription(`Server is currently offline!`)
         }
-        let atch;
+        const files = [];
         if(res.icon) {
             const buffer = Buffer.from(res.icon, "base64");
-            atch = new AttachmentBuilder(buffer, { name: "icon.png" });
+            const atch = new AttachmentBuilder(buffer, { name: "icon.png"});
+            files.push(atch);
         }
-        resEmbed.setThumbnail(`attachment://${atch?.name}`);
-
-        msg.channel.send({
-            embeds: [resEmbed]
+        resEmbed.setImage(`attachment://icon.png`);
+        await msg.channel.send({
+            embeds: [resEmbed],
+            files: files
         });
     }
 }

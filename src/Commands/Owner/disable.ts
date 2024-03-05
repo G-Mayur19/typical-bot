@@ -3,8 +3,6 @@ import { EmbedBuilder } from "discord.js";
 import { OwnerDB } from "../../Models/owner";
 import {  readdirSync } from "fs";
 import { join } from "path";
-import { getCmd } from "../../Functions/getCmd";
-import { isCommand } from "../../Functions/isCommand";
 
 const command: Command = {
     name: "disable",
@@ -27,9 +25,9 @@ const command: Command = {
                 if(!args[1]) return;
                 const choice = args[1].toLowerCase();
 
-                const res = getCmd(client, choice, false);
+                const res = client.getCmd(client, choice, false);
                 if(!res) return message.reply("Command not found!");
-                if(!isCommand(res)) return message.reply("Command doesn't belong to message category")
+                if(!client.checkCommand(res)) return message.reply("Command doesn't belong to message category")
                 if(data.Cmds.includes(res.name)) return message.reply("Command is already disabled!");
                 data.Cmds.push(res.name);
                 await data.save();

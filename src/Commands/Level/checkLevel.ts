@@ -38,6 +38,7 @@ const command: Command = {
                 value: `XP: \`${data.XP}/${CalcRequiredXP(data.Level)}\`\nRank: \`${userRank}\``
             },
         )
+        // Trying to create a attachment (soon)
         await msg.delete()
         await msg.channel.send({
             embeds: [RankEmbed]
