@@ -75,7 +75,7 @@ const command: Command = {
                 components: [row],
                 content: "Choose a category below!"
             });
-            await collector(client, msg, row, message.author.id);
+            await collector(client, msg, row, message.author.id, false);
         } else {
             const cmd = client.getCmd(client, CMD.toLowerCase(), false);
             if(!cmd) return message.reply("Command not found lmao!");
@@ -87,8 +87,8 @@ const command: Command = {
                 iconURL: message.member?.displayAvatarURL()
             })
             .setTimestamp()
-            .setTitle(cmd.name)
-            .setDescription(`Command Details\nDescription: \`${cmd.description}\`\nUsage: \`${cmd.usage}\`\nAliases: \`${cmd.aliases ? cmd.aliases.join(",") : "No aliases"}\``)
+            .setTitle("Command details: ")
+            .setDescription(`Name: \`${cmd.name}\`\nDescription: \`${cmd.description}\`\nUsage: \`${cmd.usage}\`\nAliases: \`${cmd.aliases ? cmd.aliases.join(",") : "No aliases"}\``)
             .setThumbnail(client.user?.displayAvatarURL() || null);
             await message.channel.send({
                 embeds: [embed]

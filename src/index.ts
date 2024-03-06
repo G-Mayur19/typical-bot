@@ -11,4 +11,13 @@ import mongoose from "mongoose";
 mongoose.connect(client.config.Mongo).then((d) => {
     console.log("Connected to the database!")
 });
+
+process.on("uncaughtException", (err) => {
+    console.warn(err)
+});
+
+process.on("unhandledRejection", (err) => {
+    console.warn(err)
+});
+
 client.start();
