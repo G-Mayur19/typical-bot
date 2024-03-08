@@ -108,4 +108,9 @@ export class Bot extends Client {
             return result
         }
     }
+    async sendError(err: string, client: Bot) { // getting client just to make sure no error, if client didn't cache the owner ID
+        const owner = client.users.cache.get(client.config.Owner);
+        if(!owner) return;
+        await owner.send(`${err}`);
+    }
 }

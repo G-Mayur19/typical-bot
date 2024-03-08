@@ -4,5 +4,6 @@
     "Devs": ["your 1st dev/tester", "...add more"],
     "Mongo": "your mongoURI",
     "ClientID": "your clientId",
-    "GuildID": "your private/test server id"
+    "GuildID": "your private/test server id",
+    "PollChannel": "poll channel id"
 }
