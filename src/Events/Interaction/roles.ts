@@ -92,7 +92,7 @@ async function Role(member: GuildMember, customId: string, guild: Guild) {
 }
 
 async function RoleSelectMenu(member: GuildMember, guild: Guild, value: String) {
-    let result;
+    let result: any;
     const roleId = colorRoles.find((v) => v.name === value)?.ID;
     if(!roleId) return result = `Failed!\nTry again later!`
     const role = await guild.roles.fetch(roleId);
@@ -104,8 +104,9 @@ async function RoleSelectMenu(member: GuildMember, guild: Guild, value: String) 
         for (const role of colorRoles) {
             if(member.roles.cache.has(role.ID)) {
                 await member.roles.remove(role.ID)
-                result = `Removed \`${role.name}\`\n`
+                result += `Removed \`${role.name}\`\n`
             } else {
+                result = ``
                 continue;
             }
         }

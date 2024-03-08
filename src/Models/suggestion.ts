@@ -1,7 +1,10 @@
 import { model, Schema } from "mongoose";
 
 const suggestionDB = model("suggestion", new Schema({
-    userId: String,
+    userId: {
+        type: String,
+        required: true
+    },
     UpVotes: {
         type: Number,
         default: 0
@@ -17,6 +20,10 @@ const suggestionDB = model("suggestion", new Schema({
     Type: {
         type: String,
         required: true
+    },
+    MsgID: {
+        type: String,
+        default: ""
     }
 }));
 
